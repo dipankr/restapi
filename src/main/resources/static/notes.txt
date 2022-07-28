@@ -1,0 +1,1 @@
+we can try interchanging the produces=html and @ResponseBody annotation
