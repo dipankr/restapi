@@ -13,4 +13,15 @@ public class HTMLUtil {
                 "    </body>\n" +
                 "</html>";
     }
+
+    public static String getTextHTML(String fact){
+        return "<html><body><span style=\"font-size: calc(3vw + 3vh);\")>"+fact+"</span></body></html>";
+    }
+
+    public static boolean isImage(String res) {
+        return  res.endsWith(".jpg\"}")  ||
+                res.endsWith(".jpeg\"}") ||
+                res.endsWith(".png\"}")  ||
+                res.endsWith(".gif\"}");
+    }
 }

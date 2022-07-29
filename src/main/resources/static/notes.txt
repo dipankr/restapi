@@ -1,1 +1,1 @@
-we can try interchanging the produces=html and @ResponseBody annotation
+we can try interchanging the produces=html and @ResponseBody annotation --- verified, both behave same

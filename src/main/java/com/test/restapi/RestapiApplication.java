@@ -10,7 +10,11 @@ public class RestapiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RestapiApplication.class, args);
 
-		System.out.println("\n==============================================\n||" + ConsoleColor.YELLOW_BRIGHT + "\t\trestapi application started :)\t\t" + ConsoleColor.RESET + "||\n==============================================\n");
+		System.out.println("\n==============================================\n||" +
+							ConsoleColor.YELLOW_BRIGHT +
+							"\t\trestapi application started :)\t\t" +
+							ConsoleColor.RESET +
+							"||\n==============================================\n");
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.StringReader;
@@ -20,16 +21,23 @@ public class GreetController {
     @GetMapping("/")
     public ResponseEntity<?> success(){
         String msg = "Server up and running: RestAPI";
-        return ResponseEntity.status(HttpStatus.OK).body(msg);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(msg);
     }
 
     @GetMapping("/greet")
     public ResponseEntity<?> sayHello(){
-        return ResponseEntity.badRequest().body("Hello! Greetings from the rest api application.");
+        return ResponseEntity
+                .badRequest()
+                .body("Hello! Greetings from the rest api application.");
     }
+
     @PostMapping
     public ResponseEntity<?> sayHelloWithName(@RequestBody String name){
-        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("Hello "+name+"! Welcome to the rest api application using spring boot");
+        return ResponseEntity
+                .status(HttpStatus.I_AM_A_TEAPOT)
+                .body("Hello "+name+"! Welcome to the rest api application using spring boot");
     }
 
     @GetMapping("/self")
@@ -43,20 +51,28 @@ public class GreetController {
     @GetMapping("/meow")
     @ResponseBody
     public String apiCat(){
-        String uri = "https://github.com/wh-iterabb-it/meowfacts";
+        //meowfacts.herokuapp.com/
+        String uri = "http://meowfacts.herokuapp.com/";
         RestTemplate rt = new RestTemplate();
-        String result = rt.getForObject(uri, String.class);
-        return result;
+        String res = rt.getForObject(uri, String.class);
+
+        JsonReader reader = Json.createReader(new StringReader(res));
+        JsonObject obj = reader.readObject();
+        JsonArray arr = obj.getJsonArray("data");
+        String data = arr.getString(0);
+
+        return HTMLUtil.getTextHTML(data);
     }
 
-    @RequestMapping(value = "/dogs", produces = MediaType.TEXT_HTML_VALUE)
-    public String apiRandDog() {
+    @RequestMapping(value = "/dogs")
+    @ResponseBody
+    public ResponseEntity<?> apiRandDog() {
         String uri = "https://random.dog/woof.json";
         RestTemplate rt = new RestTemplate();
         String res = rt.getForObject(uri, String.class);
 
         //fetch only images/gifs
-        while(!(null == res || res.endsWith(".jpg\"}") || res.endsWith(".jpeg\"}") || res.endsWith(".png\"}") || res.endsWith(".gif\"}"))){
+        while(!(null == res || HTMLUtil.isImage(res))){
             res = rt.getForObject(uri, String.class);
         }
 
@@ -67,7 +83,7 @@ public class GreetController {
         System.out.println("url = https://" + url);
 
         String t = HTMLUtil.getDogViewHTML(url);
-        return t;
+        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(t);
     }
 
     @GetMapping("/redir")
@@ -75,5 +91,10 @@ public class GreetController {
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://www.google.com");
         return redirectView;
+    }
+
+    @GetMapping(value = "/em", produces = MediaType.TEXT_HTML_VALUE)
+    public String em() {
+        return new RestTemplate().getForObject("http://www.google.com", String.class);
     }
 }
