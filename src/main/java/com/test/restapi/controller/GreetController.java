@@ -13,13 +13,12 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.StringReader;
-import java.net.URISyntaxException;
 
 @RestController
 public class GreetController {
 
     @GetMapping("/")
-    public ResponseEntity<?> success(){
+    public ResponseEntity<?> success() {
         String msg = "Server up and running: RestAPI";
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -27,31 +26,30 @@ public class GreetController {
     }
 
     @GetMapping("/greet")
-    public ResponseEntity<?> sayHello(){
+    public ResponseEntity<?> sayHello() {
         return ResponseEntity
                 .badRequest()
                 .body("Hello! Greetings from the rest api application.");
     }
 
     @PostMapping
-    public ResponseEntity<?> sayHelloWithName(@RequestBody String name){
+    public ResponseEntity<?> sayHelloWithName(@RequestBody String name) {
         return ResponseEntity
                 .status(HttpStatus.I_AM_A_TEAPOT)
-                .body("Hello "+name+"! Welcome to the rest api application using spring boot");
+                .body("Hello " + name + "! Welcome to the rest api application using spring boot");
     }
 
     @GetMapping("/self")
-    public String apiSelf(){
+    public ResponseEntity<?> apiSelf() {
         String uri = "http://localhost:80/";
         RestTemplate rt = new RestTemplate();
         String result = rt.getForObject(uri, String.class);
-        return result;
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(result);
     }
 
     @GetMapping("/meow")
     @ResponseBody
-    public String apiCat(){
-        //meowfacts.herokuapp.com/
+    public String apiCat() {
         String uri = "http://meowfacts.herokuapp.com/";
         RestTemplate rt = new RestTemplate();
         String res = rt.getForObject(uri, String.class);
@@ -72,7 +70,7 @@ public class GreetController {
         String res = rt.getForObject(uri, String.class);
 
         //fetch only images/gifs
-        while(!(null == res || HTMLUtil.isImage(res))){
+        while (!(null == res || HTMLUtil.isImage(res))) {
             res = rt.getForObject(uri, String.class);
         }
 
@@ -87,7 +85,7 @@ public class GreetController {
     }
 
     @GetMapping("/redir")
-    public RedirectView redir() throws URISyntaxException {
+    public RedirectView redir() {
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://www.google.com");
         return redirectView;
@@ -97,4 +95,5 @@ public class GreetController {
     public String em() {
         return new RestTemplate().getForObject("http://www.google.com", String.class);
     }
+
 }

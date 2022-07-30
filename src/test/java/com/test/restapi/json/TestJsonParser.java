@@ -11,7 +11,8 @@ import java.io.StringReader;
 public class TestJsonParser {
     @Test
     void testMeow(){
-        String ip = "{\"data\":[\"Cats have individual preferences for scratching surfaces and angles. Some are horizontal scratchers while others exercise their claws vertically.\"]}";
+        String ip = "{\"data\":[\"Cats have individual preferences for scratching surfaces and angles. " +
+                    "Some are horizontal scratchers while others exercise their claws vertically.\"]}";
 
         JsonReader reader = Json.createReader(new StringReader(ip));
         JsonObject obj = reader.readObject();

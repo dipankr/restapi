@@ -1,1 +1,16 @@
 we can try interchanging the produces=html and @ResponseBody annotation --- verified, both behave same
+
+try creating a welcome page
+    - consume a rest response - list of app APIs
+    - creates a link for each of the APIs
+
+------------------------------------------------------------------------------------------------------
+USEFUL:
+------------------------------------------------------------------------------------------------------
+#find and end the process using port (e.g. 8080, PID 1234)
+netstat -aon | find "8080"
+taskkill /F /PID 1234
+
+#start a Spring BOOT application using maven
+mvn spring-boot:run
+------------------------------------------------------------------------------------------------------
