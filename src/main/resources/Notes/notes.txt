@@ -30,4 +30,8 @@ taskkill /F /PID 1234
 
 #start a Spring BOOT application using maven
 mvn spring-boot:run
+
+#docker
+docker build -t restapi:latest .
+docker run -p 80:80 restapi:latest
 ------------------------------------------------------------------------------------------------------

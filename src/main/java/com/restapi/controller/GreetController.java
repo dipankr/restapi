@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.json.Json;
@@ -17,11 +18,14 @@ import java.io.StringReader;
 public class GreetController {
 
     @GetMapping("/")
-    public ResponseEntity<?> success() {
-        String msg = "Server up and running: RestAPI";
+    public ModelAndView success() {
+        /*String msg = "Server up and running: RestAPI";
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(msg);
+                .body(msg);*/
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index.html");
+        return modelAndView;
     }
 
     @GetMapping("/greet")
