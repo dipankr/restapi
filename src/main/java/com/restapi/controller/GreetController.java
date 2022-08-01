@@ -1,8 +1,7 @@
-package com.test.restapi.controller;
+package com.restapi.controller;
 
-import com.test.restapi.util.HTMLUtil;
+import com.restapi.util.HTMLUtil;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -91,9 +90,12 @@ public class GreetController {
         return redirectView;
     }
 
-    @GetMapping(value = "/em", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "/em")
+    @ResponseBody
     public String em() {
-        return new RestTemplate().getForObject("http://www.google.com", String.class);
+        String uri = "https://github.com/public-apis/public-apis";
+        //uri = "http://www.google.com";
+        return new RestTemplate().getForObject(uri, String.class);
     }
 
 }

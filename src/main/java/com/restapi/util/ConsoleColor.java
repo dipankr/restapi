@@ -1,4 +1,4 @@
-package com.test.restapi.util;
+package com.restapi.util;
 
 public class ConsoleColor {
     // Reset

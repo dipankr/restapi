@@ -1,6 +1,6 @@
-package com.test.restapi;
+package com.restapi;
 
-import com.test.restapi.util.ConsoleColor;
+import com.restapi.util.ConsoleColor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,4 +1,4 @@
-package com.test.restapi.json;
+package com.restapi.json;
 
 import org.junit.jupiter.api.Test;
 
