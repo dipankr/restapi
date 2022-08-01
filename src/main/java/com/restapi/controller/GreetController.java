@@ -94,7 +94,6 @@ public class GreetController {
     @ResponseBody
     public String em() {
         String uri = "https://github.com/public-apis/public-apis";
-        //uri = "http://www.google.com";
         return new RestTemplate().getForObject(uri, String.class);
     }
 

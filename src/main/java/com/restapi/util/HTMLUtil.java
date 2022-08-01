@@ -15,13 +15,15 @@ public class HTMLUtil {
     }
 
     public static String getTextHTML(String fact){
-        return "<html><body><span style=\"font-size: calc(3vw + 3vh);\")>"+fact+"</span></body></html>";
+        return  "<html>\n" +
+                "    <body><span style=\"font-size: calc(3vw + 3vh);\")>" + fact + "</span></body>\n" +
+                "</html>";
     }
 
     public static boolean isImage(String res) {
         return  res.endsWith(".jpg\"}")  ||
-                res.endsWith(".jpeg\"}") ||
                 res.endsWith(".png\"}")  ||
-                res.endsWith(".gif\"}");
+                res.endsWith(".gif\"}")  ||
+                res.endsWith(".jpeg\"}");
     }
 }
